@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjN2MzYWVkIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VjNDg5OSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0idXJsKCNnKSIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyMiIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9Ii0wLjUiPkdWPC90ZXh0Pgo8L3N2Zz4="/>
+  <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,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"/>
+  <link rel="apple-touch-icon" href="data:image/png;base64,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"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Greystone Vocational | Your Future Starts Now</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -768,16 +771,16 @@ footer a{color:var(--purple-lt);text-decoration:none}
 
 
 <!-- WHO WE WORK WITH -->
-<section id="who-we-work-with" style="padding:6rem 5vw;background:var(--bg);">
+<section id="who-we-work-with" style="padding:2rem 5vw 5rem;background:var(--bg);">
   <div style="max-width:1100px;margin:0 auto;">
 
-    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+    <div class="reveal" style="text-align:center;margin-bottom:2.5rem;">
       <span class="section-eyebrow">Who We Work With</span>
       <h2 class="section-title">Qualifications Accepted by<br>Organisations Across the UK</h2>
       <p class="section-sub" style="margin:0 auto;">Our accredited programmes are recognised and valued by a wide range of organisations, from uniformed services to schools, charities and businesses.</p>
     </div>
 
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:3rem;" class="reveal">
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:2.5rem;" class="reveal">
       <div class="ww-pill"><div class="ww-dot" style="background:#a855f7;"></div>Uniformed Organisations</div>
       <div class="ww-pill"><div class="ww-dot" style="background:#ec4899;"></div>Youth Clubs &amp; Groups</div>
       <div class="ww-pill"><div class="ww-dot" style="background:#06b6d4;"></div>Schools &amp; Colleges</div>
@@ -786,12 +789,9 @@ footer a{color:var(--purple-lt);text-decoration:none}
       <div class="ww-pill"><div class="ww-dot" style="background:#f43f5e;"></div>Emergency Services</div>
     </div>
 
-    <div class="reveal" style="background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(236,72,153,0.08));border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:28px 36px;display:flex;align-items:center;gap:24px;max-width:780px;margin:0 auto;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:4rem;color:var(--purple-lt);line-height:0.7;flex-shrink:0;opacity:0.5;">"</div>
-      <div>
-        <div style="font-size:1rem;color:var(--text);line-height:1.75;font-style:italic;">Great LMS system — really easy to navigate. The Level 3 AET course was well-structured and the support from the tutors was excellent throughout.</div>
-        <div style="margin-top:10px;font-size:12px;font-weight:800;color:var(--muted);">Josh Phillips &nbsp;·&nbsp; <span style="color:var(--purple-lt);">Essex Army Cadet Force</span></div>
-      </div>
+    <div class="reveal" style="text-align:center;">
+      <p style="color:var(--muted);font-size:0.95rem;margin-bottom:1.25rem;">Training multiple people from your organisation?</p>
+      <a href="#contact" class="ww-group-btn">Enquire About Group Bookings →</a>
     </div>
 
   </div>
@@ -799,17 +799,29 @@ footer a{color:var(--purple-lt);text-decoration:none}
 
 <style>
 .ww-pill{
-  display:inline-flex;align-items:center;gap:7px;
+  display:inline-flex;align-items:center;gap:9px;
   background:var(--card);
-  border:1px solid rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.08);
   border-radius:50px;
-  padding:7px 14px;
-  font-size:11px;font-weight:800;color:var(--white);
+  padding:11px 20px;
+  font-size:13px;font-weight:800;color:var(--white);
   transition:border-color 0.2s,transform 0.2s;
   white-space:nowrap;
 }
-.ww-pill:hover{border-color:rgba(124,58,237,0.5);transform:translateY(-2px);}
-.ww-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.ww-pill:hover{border-color:rgba(124,58,237,0.5);transform:translateY(-3px);}
+.ww-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.ww-group-btn{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  color:#fff;text-decoration:none;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;font-weight:700;
+  padding:13px 30px;border-radius:50px;
+  box-shadow:0 4px 20px rgba(124,58,237,0.35);
+  transition:transform 0.2s,box-shadow 0.2s;
+  letter-spacing:0.02em;
+}
+.ww-group-btn:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(124,58,237,0.5);}
 </style>
 
 <!-- PROGRESS / SKILLS ANIM -->
@@ -850,8 +862,8 @@ footer a{color:var(--purple-lt);text-decoration:none}
 
 <!-- HOW IT WORKS — LAPTOP -->
 <!-- HOW IT WORKS -->
-<section id="how-it-works" style="padding:5rem 5vw 4rem;background:var(--bg2);">
-  <div style="max-width:1100px;margin:0 auto;">
+<section id="how-it-works" style="padding:2rem 5vw 4rem;background:var(--bg2);">
+  <div style="max-width:780px;margin:0 auto;">
     <div class="reveal" style="text-align:center;margin-bottom:2.5rem;">
       <span class="section-eyebrow">How It Works</span>
       <h2 class="section-title">Your Online Learning Platform</h2>
@@ -1356,8 +1368,8 @@ setTimeout(runDemo, 800);
 .mon-step-sub{font-size:0.78rem;color:var(--muted);line-height:1.5;}
 .mon-step-line{flex:0 0 60px;height:1px;background:linear-gradient(90deg,rgba(124,58,237,0.4),rgba(236,72,153,0.4));margin-bottom:2.5rem;}
 #mon-screen .device{width:100%;height:100%;box-shadow:none;border-radius:0;border:none;}
-#mon-screen .lms{min-height:320px;}
-#mon-screen .device .lms{transform:scale(0.75);transform-origin:top left;width:133%;height:133%;}
+#mon-screen .lms{min-height:280px;}
+#mon-screen .device .lms{transform:scale(0.68);transform-origin:top left;width:147%;height:147%;}
 </style>
 
 <style>
