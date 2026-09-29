@@ -231,10 +231,30 @@
   .bar nav a[aria-current="page"]:not(.btn) { color:var(--navy); font-weight:600; }
   /* Who we work with tiles */
   .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-  .tile { aspect-ratio:1/1; background:#fff; border:1px solid var(--rule); border-radius:14px; padding:28px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; box-shadow:0 14px 30px -22px rgba(13,27,76,0.35); }
-  .tile svg { position:absolute; top:28px; left:28px; width:44px; height:44px; padding:10px; border-radius:12px; background:var(--gold-soft); stroke:var(--gold); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-  .tile h3 { margin:0 0 8px; font-size:1.3rem; color:var(--navy); letter-spacing:-0.01em; }
-  .tile p { margin:0; color:#40506E; font-size:0.95rem; }
+  .tile { aspect-ratio:1/1; perspective:1200px; }
+  .tile-in { position:relative; width:100%; height:100%; transition:transform .6s cubic-bezier(.2,.7,.2,1); transform-style:preserve-3d; }
+  .tile.flipped .tile-in { transform:rotateY(180deg); }
+  .face { position:absolute; inset:0; border-radius:16px; padding:28px; display:flex; flex-direction:column; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; }
+  .front { background:#fff; border:1px solid var(--rule); justify-content:flex-end; box-shadow:0 14px 30px -22px rgba(13,27,76,0.35); cursor:pointer; transition:box-shadow .25s, transform .25s, border-color .25s; }
+  .front::after { content:''; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .35s; }
+  .tile:not(.flipped):hover .front { transform:translateY(-6px); box-shadow:0 26px 44px -24px rgba(13,27,76,0.5); border-color:var(--navy); }
+  .tile:not(.flipped):hover .front::after { transform:scaleX(1); }
+  .front svg { position:absolute; top:28px; left:28px; width:48px; height:48px; padding:11px; border-radius:12px; background:var(--gold-soft); stroke:var(--gold); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; transition:background .25s, stroke .25s, transform .3s; }
+  .tile:hover .front svg { background:var(--navy); stroke:#fff; transform:rotate(-6deg) scale(1.06); }
+  .face h3 { margin:0 0 8px; font-size:1.3rem; color:var(--navy); letter-spacing:-0.01em; line-height:1.2; }
+  .face p { margin:0; color:#40506E; font-size:0.95rem; }
+  .flip-btn { margin-top:16px; align-self:flex-start; background:none; border:none; padding:0; font:inherit; font-weight:700; font-size:0.92rem; color:var(--navy); cursor:pointer; }
+  .flip-btn span { display:inline-block; transition:transform .25s; color:var(--gold); }
+  .tile:hover .flip-btn span { transform:translateX(5px); }
+  .back { background:var(--navy); color:#fff; transform:rotateY(180deg); }
+  .back h3 { color:#fff; font-size:1.15rem; }
+  .back p { color:#C9D4EC; font-size:0.9rem; }
+  .back ul { list-style:none; margin:14px 0 0; padding:0; }
+  .back li a { display:flex; justify-content:space-between; gap:8px; padding:9px 0; border-top:1px solid rgba(255,255,255,0.15); color:#fff; text-decoration:none; font-weight:600; font-size:0.93rem; }
+  .back li a::after { content:'→'; color:var(--gold); transition:transform .2s; }
+  .back li a:hover::after { transform:translateX(4px); }
+  .back-btn { color:#C9D4EC; margin-top:auto; padding-top:10px; font-weight:600; }
+  @media (prefers-reduced-motion:reduce) { .tile-in, .front, .front svg { transition:none; } }
   .group-note { display:flex; justify-content:space-between; align-items:center; gap:24px; margin-top:44px; transform:none; flex-wrap:wrap; }
   .group-note p { margin:4px 0 0; }
   /* Home links */
@@ -243,8 +263,8 @@
   .links b { display:block; color:var(--navy); font-size:1.1rem; margin-bottom:4px; }
   .links span { color:var(--slate); font-size:0.93rem; }
   .links a:hover b { text-decoration:underline; }
-  @media (max-width:960px) { .tiles { grid-template-columns:1fr 1fr; } .links { grid-template-columns:1fr 1fr; } }
-  @media (max-width:560px) { .tiles, .links { grid-template-columns:1fr; } .tile { aspect-ratio:auto; min-height:220px; } }
+  @media (max-width:960px) { .tiles { grid-template-columns:1fr 1fr; } .tile { aspect-ratio:auto; height:320px; } .links { grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px) { .tiles, .links { grid-template-columns:1fr; } .tile { aspect-ratio:auto; height:300px; } }
 
   /* Course detail */
   .prog li a { text-decoration:none; color:var(--navy); font-weight:500; }
@@ -300,13 +320,13 @@
   <section class="hero" aria-labelledby="h1">
     <div class="wrap">
       <div>
-        <h1 id="h1">Your next role, <s>someday</s> within reach.</h1>
-        <p class="lede">Greystone Vocational gives people the skills, qualifications and confidence to step into leadership roles and build careers they are proud of.</p>
+        <h1 id="h1">Lead further. Qualify <s>someday</s> now.</h1>
+        <p class="lede">Recognised leadership, teaching and safeguarding qualifications for the adults who lead others: instructors, volunteers, officers, staff and the organisations behind them.</p>
         <div class="ctas">
           <a class="btn solid" href="#/courses">Explore courses</a>
           <a class="btn line" href="#/how-it-works">See how it works</a>
         </div>
-        <p class="fine">Nationally recognised, Ofqual-regulated qualifications from Level 2 to Level 7. Study online, around work, school or cadet commitments, with a tutor who knows your name.</p>
+        <p class="fine">Level 1 to Level 7. Short, fully online courses you can start any time, fitted around work, shifts and unit nights, with a named tutor from enrolment to certificate.</p>
       </div>
 
       <div class="sheet" role="img" aria-label="A learner record filling itself in: three units marked Merit or Pass, then stamped Qualification achieved.">
@@ -391,14 +411,44 @@
   <section id="who" aria-labelledby="h-who">
     <div class="wrap">
       <h2 id="h-who">Who we work with</h2>
-      <p class="intro">Our accredited programmes are recognised and valued by organisations across the UK, from uniformed services to schools, charities and businesses.</p>
+      <p class="intro">We work with the adults who lead others, and the organisations that support them. Choose your area to see the courses that fit.</p>
       <div class="tiles">
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><h3>Uniformed organisations</h3><p>Cadet forces and uniformed youth groups building leaders in their ranks.</p></article>
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M12 20c0-3 2-5 5-5s5 2 5 5"/></svg><h3>Youth clubs &amp; groups</h3><p>Recognised awards for young leaders and the volunteers who run sessions.</p></article>
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><h3>Schools &amp; colleges</h3><p>Teaching and safeguarding qualifications for staff, and leadership for students.</p></article>
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-5-8-11a4 4 0 018-1 4 4 0 018 1c0 6-8 11-8 11z"/></svg><h3>Charities &amp; third sector</h3><p>Develop volunteers and managers with flexible, affordable training.</p></article>
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg><h3>Corporate &amp; business</h3><p>Team leading and management programmes that grow talent from within.</p></article>
-<article class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/><circle cx="12" cy="12" r="9"/></svg><h3>Emergency services</h3><p>Leadership and instructor qualifications that fit around shift patterns.</p></article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><h3>Adult instructors &amp; volunteers</h3><p>Turn the leading and teaching you already do into a recognised qualification.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb0">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb0"><h3>Adult instructors &amp; volunteers</h3><p>Cadet, Scout, Guide and youth instructors who want recognition for their role.</p><ul><li><a href="#/course/safeguarding">Level 2 Safeguarding</a></li><li><a href="#/course/aet">Level 3 AET</a></li><li><a href="#/course/leadership-management">Level 3 Leadership &amp; Management</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 15.4 6.7 18.4l1.2-6L3.4 8.3l6-.7z"/></svg><h3>Officers &amp; senior staff</h3><p>Level 4–7 leadership for those running units, districts and wings.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb1">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb1"><h3>Officers &amp; senior staff</h3><p>Build the strategic skills to lead leaders and manage people, budgets and change.</p><ul><li><a href="#/course/advanced-leadership">Level 4–7 Advanced Leadership</a></li><li><a href="#/course/strategic-management">Level 5–7 Strategic Management</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><h3>Schools &amp; colleges</h3><p>Safeguarding and teaching qualifications for staff and CCF leaders.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb2">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb2"><h3>Schools &amp; colleges</h3><p>Upskill support staff, contingent commanders and new trainers in one cohort.</p><ul><li><a href="#/course/safeguarding">Level 2 Safeguarding</a></li><li><a href="#/course/aet">Level 3 AET</a></li><li><a href="#/course/team-leading">Level 2 Team Leading</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-5-8-11a4 4 0 018-1 4 4 0 018 1c0 6-8 11-8 11z"/></svg><h3>Charities &amp; youth organisations</h3><p>Develop the volunteers and coordinators your work depends on.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb3">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb3"><h3>Charities &amp; youth organisations</h3><p>Affordable group bookings with cohort reporting for trustees and managers.</p><ul><li><a href="#/course/safeguarding">Level 2 Safeguarding</a></li><li><a href="#/course/team-work">Level 1 Team Work</a></li><li><a href="#/course/team-leading">Level 2 Team Leading</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V4h6v3"/></svg><h3>Employers &amp; businesses</h3><p>Grow managers from within with practical, work-based programmes.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb4">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb4"><h3>Employers &amp; businesses</h3><p>From first-line supervisors to senior leadership, assessed on real workplace tasks.</p><ul><li><a href="#/course/team-leading">Level 2 Team Leading</a></li><li><a href="#/course/leadership-management">Level 3 Leadership &amp; Management</a></li><li><a href="#/course/strategic-management">Level 5–7 Strategic Management</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
+<article class="tile" data-flip>
+  <div class="tile-in">
+    <div class="face front"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/><circle cx="12" cy="12" r="9"/></svg><h3>Emergency services</h3><p>Leadership and instructor qualifications that fit around shift patterns.</p><button class="flip-btn" type="button" aria-expanded="false" aria-controls="tb5">See courses <span aria-hidden="true">→</span></button></div>
+    <div class="face back" id="tb5"><h3>Emergency services</h3><p>For crew managers, Fire and Police Cadet leaders, and training officers.</p><ul><li><a href="#/course/aet">Level 3 AET</a></li><li><a href="#/course/leadership-management">Level 3 Leadership &amp; Management</a></li><li><a href="#/course/advanced-leadership">Level 4–7 Advanced Leadership</a></li></ul><button class="flip-btn back-btn" type="button" aria-label="Back to summary">← Back</button></div>
+  </div>
+</article>
       </div>
       <div class="note group-note">
         <div><span class="hand">Training a whole team?</span>
@@ -581,6 +631,16 @@
     const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
     const a = document.createElement('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  // Who we work with: flip tiles
+  document.querySelectorAll('[data-flip]').forEach(tile => {
+    const open = tile.querySelector('.front .flip-btn'), back = tile.querySelector('.back-btn');
+    const front = tile.querySelector('.front'), backFace = tile.querySelector('.back');
+    const set = on => { tile.classList.toggle('flipped', on); open.setAttribute('aria-expanded', on); front.inert = on; backFace.inert = !on; (on ? backFace.querySelector('a') : open).focus({ preventScroll: true }); };
+    backFace.inert = true;
+    front.addEventListener('click', () => set(true));
+    back.addEventListener('click', e => { e.stopPropagation(); set(false); });
   });
 
   // Simple page router
